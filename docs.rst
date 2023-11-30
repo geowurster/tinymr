@@ -6,22 +6,6 @@ In-memory `MapReduce <https://en.wikipedia.org/wiki/MapReduce>`_ framework.
 .. contents:: Table of Contents
     :depth: 2
 
-Overview
---------
-
-First and foremost: this is a personal project. It may be used according to the
-terms of the license, but it is not intended to be production-grade software
-or supported in any way outside of my own personal interests. An outdated
-package exists on the `Python Package Index <https://pypi.org/pypi/tinymr>`_,
-however I am no longer interested in supporting this package.
-
-``tinymr`` seeks to be:
-
-#. Easy to use with minimal overhead.
-#. Fast.
-#. Tunable.
-#. Occasionally actually useful.
-
 Brief MapReduce Overview
 ------------------------
 
@@ -368,10 +352,13 @@ The pattern is the same.
     ...     def output(self, mapping):
     ...         return Counter(mapping)
     >>>
-    >>> infiles = ['LICENSE.txt'] * os.cpu_count()
+    >>> # Normally 'os.cpu_count()' would be used, but this code snippet is
+    >>> # automatically tested and requires a stable value in all environments.
+    >>> cpu_count = 2
+    >>> infiles = ['LICENSE.txt'] * cpu_count
     >>>
-    >>> threadpool1 = ThreadPool(os.cpu_count())
-    >>> threadpool2 = ThreadPoolExecutor(os.cpu_count())
+    >>> threadpool1 = ThreadPool(cpu_count)
+    >>> threadpool2 = ThreadPoolExecutor(cpu_count)
     >>>
     >>> wordcount = WordCount()
     >>> with threadpool1 as threadpool1, threadpool2 as threadpool2:
@@ -381,7 +368,7 @@ The pattern is the same.
     ...         reducer_map=threadpool2.map
     ...     )
     >>> count.most_common(3)
-    [('OR', 64), ('OF', 64), ('the', 56)]
+    [('OR', 16), ('OF', 16), ('the', 14)]
 
 In this case each ``reducer()`` is receiving a single word, so exeecuting each
 ``reducer()`` in a separate process/thread is very inefficient. Instead it may

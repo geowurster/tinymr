@@ -1,7 +1,14 @@
 tinymr
 ======
 
-In-memory MapReduce. A personal project.
+In-memory MapReduce.
+
+``tinymr`` seeks to be:
+
+#. Easy to use with minimal overhead.
+#. Fast.
+#. Tunable.
+#. Occasionally actually useful.
 
 Documentation
 -------------

@@ -4,6 +4,7 @@
 import abc
 import builtins
 from collections import defaultdict
+import importlib.metadata
 from inspect import isgeneratorfunction
 import itertools as it
 from functools import partial
@@ -13,7 +14,14 @@ import operator as op
 __all__ = ["ElementCountError", "MapReduce"]
 
 
-__version__ = "1.0"
+try:
+    __version__ = importlib.metadata.version('tinymr')
+except importlib.metadata.PackageNotFoundError:  # pragma: no cover
+    # One benefit of 'tinymr' is that it is contained within a single file,
+    # and can just be copied wherever. In these cases it is not actually
+    # installed, and does not have package metadata. PEP-723 will be an
+    # improvement: https://peps.python.org/pep-0723/
+    __version__ = '0.0'
 
 
 class MapReduce(abc.ABC):
