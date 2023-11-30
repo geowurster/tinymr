@@ -6,22 +6,6 @@ In-memory `MapReduce <https://en.wikipedia.org/wiki/MapReduce>`_ framework.
 .. contents:: Table of Contents
     :depth: 2
 
-Overview
---------
-
-First and foremost: this is a personal project. It may be used according to the
-terms of the license, but it is not intended to be production-grade software
-or supported in any way outside of my own personal interests. An outdated
-package exists on the `Python Package Index <https://pypi.org/pypi/tinymr>`_,
-however I am no longer interested in supporting this package.
-
-``tinymr`` seeks to be:
-
-#. Easy to use with minimal overhead.
-#. Fast.
-#. Tunable.
-#. Occasionally actually useful.
-
 Brief MapReduce Overview
 ------------------------
 
